@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Марии 🫶🏻</title>
+    <link rel="stylesheet" href="website.css">
+    <link rel="icon" href="favicon.png">
+</head>
+<body class="page2-body">
+
+    <div class="wrapper">
+        <h1 class="lastly-title">Lastly...</h1>
+
+        <div class="message-container">
+            <p class="congrats-text">
+                Мария, если ты читаешь это, значит, ты уже досмотрела видео... <br><br>
+                Я долго думал, стоит ли это говорить, но решил быть честным. Ты удивительный человек, и чувства к тебе возникли сами собой, просто потому, что ты такая, какая есть. <br><br>
+                Но я хочу, чтобы ты знала самое главное: это признание ни к чему тебя не обязывает. Если ты не чувствуешь того же самого — это абсолютно нормально. Пожалуйста, не чувствуй себя «плохой» или виноватой. Я тебя пойму, я не буду тебя ни в чём обвинять.<br><br>
+                Я просто хотел, чтобы ты знала правду. Каким бы ни был твой ответ, я рад, что ты есть в моей жизни. Мен сени абдан сүйөм🫶🏻.
+            </p>
+        </div>
+
+        <div class="button-container">
+            <a href="kyrgyz_version.html" class="my-button" style="background-color: #d63384; color: white; border: none;">Кыргызча окуу</a>
+            <a href="index.html" class="my-button">← Вернуться назад</a>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="Enya - Carribean Blue.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        var music = document.getElementById("bgMusic");
+        window.addEventListener('load', function () {
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                music.currentTime = parseFloat(localStorage.getItem('musicTime')) || 0;
+                music.play().catch(function () {
+                    document.addEventListener('click', function () { music.play(); }, { once: true });
+                });
+            }
+        });
+        setInterval(function () {
+            if (!music.paused) localStorage.setItem('musicTime', music.currentTime);
+        }, 1000);
+    </script>
+</body>
+</html>

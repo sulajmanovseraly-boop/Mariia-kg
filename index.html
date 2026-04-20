@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туулган күнүң менен, Мария🫶🏻!</title>
+    <link rel="stylesheet" href="website.css">
+    <link rel="shortcut icon" href="hasdw.png">
+</head>
+<body class="page1-body">
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="wrapper">
+        <section class="damn">
+            <h1>Mariiaaaa!</h1>
+        </section>
+
+        <div class="music-box">
+            <p>включи для атмосферы✨</p>
+            <audio id="bgMusic" loop preload="auto">
+                <source src="Enya - Carribean Blue.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="toggleMusic()" id="musicBtn" class="play-button">Play 🎵</button>
+        </div>
+
+        <div class="photos">
+            <img src="her.jpg" class="her" alt="Photo 1">
+
+            <video class="her" id="mainVideo" controls playsinline preload="metadata">
+                <source src="v.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+
+            <img src="her2.jpg" class="her" alt="Photo 2">
+        </div>
+
+        <div class="message">
+            <h2>привет Мария! я не знал как тебя поздравить, поэтому я сделал этот "сайт"😅. этот сайт будет работать всегда!</h2>
+            <p>you are the most gorgeous girl, ever!</p>
+        </div>
+
+        <div class="button-container">
+            <a href="page2.html" class="my-button">✨ Марияяя, нажми сюда! ✨</a>
+        </div>
+    </div>
+
+    <script>
+        /* ---- Music ---- */
+        var music = document.getElementById("bgMusic");
+        var btn   = document.getElementById("musicBtn");
+
+        window.addEventListener('load', function () {
+            if (localStorage.getItem('musicPlaying') === 'true') {
+                music.currentTime = parseFloat(localStorage.getItem('musicTime')) || 0;
+                music.play().catch(() => {});
+                updateBtn(true);
+            }
+        });
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                localStorage.setItem('musicPlaying', 'true');
+                updateBtn(true);
+            } else {
+                music.pause();
+                localStorage.setItem('musicPlaying', 'false');
+                updateBtn(false);
+            }
+        }
+
+        function updateBtn(playing) {
+            btn.innerHTML = playing ? "Pause ⏸" : "Play 🎵";
+            btn.style.background = playing
+                ? "linear-gradient(135deg, #5C92CC, #1d7ac7)"
+                : "linear-gradient(135deg, #1d7ac7, #5C92CC)";
+        }
+
+        setInterval(function () {
+            if (!music.paused) localStorage.setItem('musicTime', music.currentTime);
+        }, 1000);
+
+        /* ---- Floating Hearts ---- */
+        var emojis = ['🩷','💙','🫶🏻','💖','✨','💝','🌸'];
+        var container = document.getElementById('heartsContainer');
+
+        function spawnHeart() {
+            var el = document.createElement('span');
+            el.className = 'heart-particle';
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            var size = 14 + Math.random() * 18;
+            var dur  = 7 + Math.random() * 8;
+            var left = Math.random() * 100;
+            el.style.cssText = [
+                'left:' + left + '%',
+                'font-size:' + size + 'px',
+                'animation-duration:' + dur + 's',
+                'animation-delay:' + (Math.random() * 3) + 's'
+            ].join(';');
+            container.appendChild(el);
+            setTimeout(function () { el.remove(); }, (dur + 3) * 1000);
+        }
+
+        for (var i = 0; i < 8; i++) setTimeout(spawnHeart, i * 600);
+        setInterval(spawnHeart, 1200);
+    </script>
+</body>
+</html>
