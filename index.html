@@ -45,12 +45,44 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <script>
+        /* ---- Confetti Effect ---- */
+        function celebrate() {
+            // Первый мощный залп
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#FF69B4', '#FFB6C1', '#87CEEB', '#FFD700'] // Розовый, голубой, золотой
+            });
+
+            // Дополнительные залпы по бокам через 1 секунду
+            setTimeout(() => {
+                confetti({
+                    particleCount: 100,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 100,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }, 1000);
+        }
+
         /* ---- Music ---- */
         var music = document.getElementById("bgMusic");
         var btn   = document.getElementById("musicBtn");
 
         window.addEventListener('load', function () {
+            // Запускаем конфетти при загрузке
+            celebrate();
+
             if (localStorage.getItem('musicPlaying') === 'true') {
                 music.currentTime = parseFloat(localStorage.getItem('musicTime')) || 0;
                 music.play().catch(() => {});
